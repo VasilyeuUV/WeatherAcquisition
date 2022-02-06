@@ -16,8 +16,4 @@
     <ProjectReference Include="..\..\Services\WeatherAcquisition.Interfaces.Base\WeatherAcquisition.Interfaces.Base.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Entities\_Base\" />
-  </ItemGroup>
-
 </Project>
