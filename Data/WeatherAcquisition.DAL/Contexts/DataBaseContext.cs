@@ -6,7 +6,7 @@ namespace WeatherAcquisition.DAL.Contexts
     /// <summary>
     /// Контекст базы данных
     /// </summary>
-    internal class DataBaseContext : DbContext
+    public class DataBaseContext : DbContext
     {
         /// <summary>
         /// Значения
