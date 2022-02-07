@@ -21,7 +21,7 @@ namespace WeatherAcquisition.DAL.Entities
         public string Value { get; set; }
 
         /// <summary>
-        /// Источник, откуда получено значение
+        /// Источник, откуда получено значение (навигационное свойство)
         /// </summary>
         public DataSource Source { get; set; }
 

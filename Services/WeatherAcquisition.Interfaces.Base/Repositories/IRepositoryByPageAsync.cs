@@ -18,7 +18,7 @@ namespace WeatherAcquisition.Interfaces.Base.Repositories
         /// <param name="count">Количество получаемых сущностей</param>
         /// <param name="cancel">Возможность отмены операции</param>
         /// <returns></returns>
-        Task<IEnumerable<T>> GetAsync(long skip, int count, CancellationToken cancel = default);
+        Task<IEnumerable<T>> GetAsync(int skip, int count, CancellationToken cancel = default);
 
 
         /// <summary>

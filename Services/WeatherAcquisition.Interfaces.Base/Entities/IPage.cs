@@ -10,7 +10,7 @@ namespace WeatherAcquisition.Interfaces.Base.Entities
     public interface IPage<out T>
     {
         /// <summary>
-        /// Индекс текущей страницы
+        /// Номер страницы
         /// </summary>
         int Index { get; }
 
@@ -20,7 +20,7 @@ namespace WeatherAcquisition.Interfaces.Base.Entities
         int Size { get; }
 
         /// <summary>
-        /// Перечисление элементов страницы
+        /// Список элементов страницы
         /// </summary>
         public IEnumerable<T> Items { get; }
 

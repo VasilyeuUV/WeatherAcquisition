@@ -11,12 +11,12 @@ namespace WeatherAcquisition.DAL.Contexts
         /// <summary>
         /// Значения
         /// </summary>
-        DbSet<DataValue> Values { get; set; }
+        public DbSet<DataValue> Values { get; set; }
 
         /// <summary>
         /// Источники данных
         /// </summary>
-        DbSet<DataSource> Sources { get; set; }
+        public DbSet<DataSource> Sources { get; set; }
 
 
 
@@ -37,7 +37,7 @@ namespace WeatherAcquisition.DAL.Contexts
 
             modelBuilder.Entity<DataSource>()       // имеем этот тип в БД
                 .HasMany<DataValue>()               // который имеет множество этих значений 
-                .WithOne(v => v.Source)             // с о тношением один ко многим
+                .WithOne(v => v.Source)             // с отношением один ко многим
                 .OnDelete(DeleteBehavior.Cascade);  // и политикой удаления (удаляем DataSource, удаляются все его DataValue)
         }
     }

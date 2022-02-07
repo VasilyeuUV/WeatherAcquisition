@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Threading;
+using System.Threading.Tasks;
 
 namespace WeatherAcquisition.Interfaces.Base.Operations
 {
@@ -8,9 +9,10 @@ namespace WeatherAcquisition.Interfaces.Base.Operations
     public interface IGetCountAsync
     {
         /// <summary>
-        /// Полученить количество
+        /// Получить количество
         /// </summary>
-        /// <returns></returns>
-        Task<long> GetCountAsync();
+        /// <param name="cancel">Возможность отмены операции</param>
+        /// <returns>Количество посчитанных единиц</returns>
+        Task<long> GetCountAsync(CancellationToken cancel = default);
     }
 }
