@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 using WeatherAcquisition.Interfaces.Base.Entities;
 using WeatherAcquisition.Interfaces.Base.EntityAbilities;
@@ -16,8 +17,9 @@ namespace WeatherAcquisition.Interfaces.Base.Repositories
         /// <summary>
         /// Получить все сущности
         /// </summary>
-        /// <returns></returns>
-        Task<IEnumerable<T>> GetAllAsync();
+        /// <param name="cancel">Возможность отмены операции</param>
+        /// <returns>Список сущностей</returns>
+        Task<IEnumerable<T>> GetAllAsync(CancellationToken cancel = default);
 
     }
 }

@@ -7,7 +7,7 @@ namespace WeatherAcquisition.Interfaces.Base.Entities
     /// Страница
     /// </summary>
     /// <typeparam name="T">"Элемент страницы</typeparam>
-    public interface IPage<T>
+    public interface IPage<out T>
     {
         /// <summary>
         /// Индекс текущей страницы

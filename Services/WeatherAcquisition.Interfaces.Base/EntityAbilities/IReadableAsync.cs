@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 using WeatherAcquisition.Interfaces.Base.Entities;
 
@@ -14,7 +15,8 @@ namespace WeatherAcquisition.Interfaces.Base.EntityAbilities
         /// Чтение (получение) сущности по ее Id
         /// </summary>
         /// <param name="Id">Id получаемой сущности</param>
-        /// <returns></returns>
-        Task<T> GetByIdAsync(Guid Id);
+        /// <param name="cancel">Возможность прервать операцию</param>
+        /// <returns>Возвращает сущность по Id</returns>
+        Task<T> GetByIdAsync(Guid Id, CancellationToken cancel = default);
     }
 }

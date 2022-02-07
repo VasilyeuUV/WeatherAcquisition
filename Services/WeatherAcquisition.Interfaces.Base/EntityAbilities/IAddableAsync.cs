@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Threading;
+using System.Threading.Tasks;
 using WeatherAcquisition.Interfaces.Base.Entities;
 
 namespace WeatherAcquisition.Interfaces.Base.EntityAbilities
@@ -13,7 +14,8 @@ namespace WeatherAcquisition.Interfaces.Base.EntityAbilities
         /// Добавление сущности 
         /// </summary>
         /// <param name="item">Добавляемая сущность</param>
-        /// <returns></returns>
-        Task<T> AddAsync(T item);
+        /// <param name="cancel">Возможность прервать операцию</param>
+        /// <returns>Возвращает добавленную сущность</returns>
+        Task<T> AddAsync(T item, CancellationToken cancel = default);
     }
 }
