@@ -7,6 +7,9 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using WeatherAcquisition.API.Data;
 using WeatherAcquisition.DAL.Contexts;
+using WeatherAcquisition.DAL.Entities;
+using WeatherAcquisition.DAL.Repositories;
+using WeatherAcquisition.Interfaces.Base.Repositories;
 
 namespace WeatherAcquisition.API
 {
@@ -25,6 +28,17 @@ namespace WeatherAcquisition.API
 
             // Подключаем инициализатор БД
             services.AddTransient<DataBaseContextInitializer>();
+
+            // Подключаем репозитории
+            //// Вариант 1 - долгий. Подключаем каждую сущность
+            //services.AddScoped<IRepository<DataSource>, DbRepository<DataSource>>();
+            //services.AddScoped<IRepository<DataValue>, DbRepository<DataValue>>();
+            // Вариант 2 - нормальный.
+            // Подключаем сервис, который определяется типом интерфейса, не указывая, для какой конкретно сущности
+            // т.е. в коллекции сервисов можно регистрировать абстрактные (шаблонные) понятия,
+            // в котороые в последующем контейнер сервисов будет сам подставлять T
+            services.AddScoped(typeof(IRepository<>), typeof(DbRepository<>));              // - регистрируем базовый репозиторий
+            services.AddScoped(typeof(INamedRepository<>), typeof(DbNamedRepository<>));    // - регистрируем именованный репозиторий
 
 
             /* ДЛЯ ЗАПУСКА МИГРАЦИИ:
