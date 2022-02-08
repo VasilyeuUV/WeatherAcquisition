@@ -16,7 +16,7 @@ namespace WeatherAcquisition.Interfaces.Base.Repositories
         /// <param name="item">Сущность</param>
         /// <param name="cancel">Возможность прервать операцию</param>
         /// <returns>Возвращает true/false</returns>
-        Task<bool> CheckNameExistAsync(string Name, CancellationToken cancel = default);
+        Task<bool> CheckNameExistAsync(string name, CancellationToken cancel = default);
 
         /// <summary>
         /// Получение сущностей по имени
