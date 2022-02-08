@@ -43,6 +43,11 @@ namespace WeatherAcquisition.DAL.Repositories
 
 
         /// <summary>
+        /// Разрешает или запрещает автоматическое сохранение изменений
+        /// </summary>
+        public bool AutoSaveChanges { get; set; }
+
+        /// <summary>
         /// CTOR
         /// </summary>
         /// <param name="dbContext">Контекст базы данных</param>
@@ -52,6 +57,16 @@ namespace WeatherAcquisition.DAL.Repositories
             Set = this._dbContext.Set<T>();
         }
 
+
+        /// <summary>
+        /// Сохранение в БД
+        /// </summary>
+        /// <param name="cancel">Возможность прервать операцию</param>
+        /// <returns>Чесло, указывающее количество реально выполненных изменений</returns>
+        public async Task<int> SaveChangesAsync(CancellationToken cancel = default)
+            => await _dbContext
+            .SaveChangesAsync(cancel)
+            .ConfigureAwait(false);
 
         //########################################################################################################################
         #region IRepository<T>
@@ -84,7 +99,11 @@ namespace WeatherAcquisition.DAL.Repositories
             if (count <= 0)
                 return Enumerable.Empty<T>();
 
-            var query = Items;
+            IQueryable<T> query = Items switch
+            {
+                IOrderedQueryable<T> orderedQuery => orderedQuery,  // - если Items - упорядоченная последовательность, то её и возвращаем
+                { } q => q.OrderBy(i => i.Id)                       // - если нет - упорядочиваем.
+            };
             if (skip > 0)
                 query = query.Skip(skip); ;
 
@@ -148,9 +167,13 @@ namespace WeatherAcquisition.DAL.Repositories
             await _dbContext
                 .AddAsync(item, cancel)
                 .ConfigureAwait(false);
-            await _dbContext
-                .SaveChangesAsync(cancel)
-                .ConfigureAwait(false);
+
+            if (AutoSaveChanges)
+                await SaveChangesAsync(cancel).ConfigureAwait(false);
+
+            //await _dbContext
+            //    .SaveChangesAsync(cancel)           // каждая операция будет сохраняться в БД
+            //    .ConfigureAwait(false);
 
             return item;
         }
@@ -164,9 +187,13 @@ namespace WeatherAcquisition.DAL.Repositories
             //_dbContext.Entry(item).State = EntityState.Modified;
             //Set.Update(item);
             _dbContext.Update(item);
-            await _dbContext
-                .SaveChangesAsync(cancel)
-                .ConfigureAwait(false);
+
+            if (AutoSaveChanges)
+                await SaveChangesAsync(cancel).ConfigureAwait(false);
+
+            //await _dbContext
+            //    .SaveChangesAsync(cancel)            // каждая операция будет сохраняться в БД
+            //    .ConfigureAwait(false);
 
             return item;
 
@@ -184,9 +211,13 @@ namespace WeatherAcquisition.DAL.Repositories
             //_dbContext.Entry(item).State = EntityState.Deleted;
             //Set.Remove(item);
             _dbContext.Remove(item);
-            await _dbContext
-                .SaveChangesAsync(cancel)
-                .ConfigureAwait(false);
+
+            if (AutoSaveChanges)
+                await SaveChangesAsync(cancel).ConfigureAwait(false);
+
+            //await _dbContext
+            //    .SaveChangesAsync(cancel)           // каждая операция будет сохраняться в БД
+            //    .ConfigureAwait(false);
 
             return item;
         }
