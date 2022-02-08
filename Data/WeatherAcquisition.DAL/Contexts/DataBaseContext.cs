@@ -46,6 +46,17 @@ namespace WeatherAcquisition.DAL.Contexts
             modelBuilder.Entity<DataSource>()
                 .HasIndex(source => source.Name)
                 .IsUnique(true);
+
+            // Индекс по времени при получении DataValue
+            modelBuilder.Entity<DataValue>()
+                .HasIndex(source => source.GetedValueDtg);
+
+            //// поле Name таблицы DataSource обязательно для заполнения
+            //modelBuilder.Entity<DataSource>()
+            //    .Property(source => source.Name)
+            //    .IsRequired();
+
+
         }
     }
 }

@@ -12,8 +12,8 @@ using WeatherAcquisition.DAL.Contexts;
 namespace WeatherAcquisition.DAL.SqlServer.Migrations
 {
     [DbContext(typeof(DataBaseContext))]
-    [Migration("20220208021427_DataSource_Name_AddUniqueKey")]
-    partial class DataSource_Name_AddUniqueKey
+    [Migration("20220208024617_DataValue_DtgIndex")]
+    partial class DataValue_DtgIndex
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -34,13 +34,13 @@ namespace WeatherAcquisition.DAL.SqlServer.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("Name")
-                        .IsUnique()
-                        .HasFilter("[Name] IS NOT NULL");
+                        .IsUnique();
 
                     b.ToTable("Sources");
                 });
@@ -51,7 +51,7 @@ namespace WeatherAcquisition.DAL.SqlServer.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTimeOffset>("DtgGetValue")
+                    b.Property<DateTimeOffset>("GetedValueDtg")
                         .HasColumnType("datetimeoffset");
 
                     b.Property<bool>("IsFault")
@@ -64,6 +64,8 @@ namespace WeatherAcquisition.DAL.SqlServer.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("GetedValueDtg");
 
                     b.HasIndex("SourceId");
 

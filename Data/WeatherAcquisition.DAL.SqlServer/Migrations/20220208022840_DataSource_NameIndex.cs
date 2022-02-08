@@ -4,7 +4,7 @@
 
 namespace WeatherAcquisition.DAL.SqlServer.Migrations
 {
-    public partial class DataSource_Name_AddUniqueKey : Migration
+    public partial class DataSource_NameIndex : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -12,7 +12,8 @@ namespace WeatherAcquisition.DAL.SqlServer.Migrations
                 name: "Name",
                 table: "Sources",
                 type: "nvarchar(450)",
-                nullable: true,
+                nullable: false,
+                defaultValue: "",
                 oldClrType: typeof(string),
                 oldType: "nvarchar(max)",
                 oldNullable: true);
@@ -21,8 +22,7 @@ namespace WeatherAcquisition.DAL.SqlServer.Migrations
                 name: "IX_Sources_Name",
                 table: "Sources",
                 column: "Name",
-                unique: true,
-                filter: "[Name] IS NOT NULL");
+                unique: true);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -37,8 +37,7 @@ namespace WeatherAcquisition.DAL.SqlServer.Migrations
                 type: "nvarchar(max)",
                 nullable: true,
                 oldClrType: typeof(string),
-                oldType: "nvarchar(450)",
-                oldNullable: true);
+                oldType: "nvarchar(450)");
         }
     }
 }

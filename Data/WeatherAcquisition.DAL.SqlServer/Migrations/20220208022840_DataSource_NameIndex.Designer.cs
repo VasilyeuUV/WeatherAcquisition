@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WeatherAcquisition.DAL.Contexts;
 
@@ -11,9 +12,10 @@ using WeatherAcquisition.DAL.Contexts;
 namespace WeatherAcquisition.DAL.SqlServer.Migrations
 {
     [DbContext(typeof(DataBaseContext))]
-    partial class DataBaseContextModelSnapshot : ModelSnapshot
+    [Migration("20220208022840_DataSource_NameIndex")]
+    partial class DataSource_NameIndex
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -49,7 +51,7 @@ namespace WeatherAcquisition.DAL.SqlServer.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTimeOffset>("GetedValueDtg")
+                    b.Property<DateTimeOffset>("DtgGetValue")
                         .HasColumnType("datetimeoffset");
 
                     b.Property<bool>("IsFault")
@@ -62,8 +64,6 @@ namespace WeatherAcquisition.DAL.SqlServer.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("GetedValueDtg");
 
                     b.HasIndex("SourceId");
 

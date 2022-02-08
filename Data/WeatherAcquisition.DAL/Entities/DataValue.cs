@@ -13,7 +13,7 @@ namespace WeatherAcquisition.DAL.Entities
         /// Время получения значение в формате UTC (относительно нудевого меридиана)<br/>
         /// Осуществляются автоматические преобразования в конкретную временную зону
         /// </summary>
-        public DateTimeOffset DtgGetValue { get; set; } = DateTimeOffset.Now;
+        public DateTimeOffset GetedValueDtg { get; set; } = DateTimeOffset.Now;
 
         /// <summary>
         /// Значение, которое получаем
