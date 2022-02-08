@@ -2,8 +2,10 @@
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using WeatherAcquisition.DAL.Entities;
+using WeatherAcquisition.Interfaces.Base.Entities;
 using WeatherAcquisition.Interfaces.Base.Repositories;
 
 namespace WeatherAcquisition.API.Controllers
@@ -69,10 +71,29 @@ namespace WeatherAcquisition.API.Controllers
         /// <param name="skip">Количество пропущенных источников данных</param>
         /// <param name="count">Количество получаемых источников данных</param>
         /// <returns>Список источников данных</returns>
-        [HttpGet("items[[{skip:int}:{count:int}]]")]
+        [HttpGet("items[[{skip:int},{count:int}]]")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<IEnumerable<DataSource>>> Get(int skip, int count)
             => Ok(await _repository.GetAsync(skip, count));
 
+
+
+        /// <summary>
+        /// Получение страницы с источниками данных
+        /// </summary>
+        /// <param name="pageIndex">Номер страницы</param>
+        /// <param name="pageSize">Размер страницы</param>
+        /// <returns>Страница с источниками данных</returns>
+        [HttpGet("page/{pageIndex:int}/{pageSize}")]           // - вариант вызова 1
+        [HttpGet("page[[{pageIndex:int},{pageSize:int}]]")]    // - вариант вызова 2
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<ActionResult<IPage<DataSource>>> GetPage(int pageIndex, int pageSize)
+        {
+            var result = await _repository.GetPageAsync(pageIndex, pageSize);
+            return result.Items.Any()
+                ? Ok(result)
+                : NotFound(result);            
+        }
     }
 }
