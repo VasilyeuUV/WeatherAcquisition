@@ -5,6 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using WeatherAcquisition.API.Data;
 using WeatherAcquisition.DAL.Contexts;
 
 namespace WeatherAcquisition.API
@@ -21,6 +22,10 @@ namespace WeatherAcquisition.API
                     o => o.MigrationsAssembly("WeatherAcquisition.DAL.SqlServer")   // -- добавляем миграции с указанием проекта,
                                                                                     // в котором они будут находится
                     ));
+
+            // Подключаем инициализатор БД
+            services.AddTransient<DataBaseContextInitializer>();
+
 
             /* ДЛЯ ЗАПУСКА МИГРАЦИИ:
               - сделать запускаемым проект из которого запускаем миграции (WeatherAcquisition.API);
@@ -56,8 +61,15 @@ namespace WeatherAcquisition.API
             });
         }
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(
+            IApplicationBuilder app, 
+            IWebHostEnvironment env,
+            DataBaseContextInitializer dbInitializer
+            )
         {
+            // Инициализируем БД
+            dbInitializer.Initialize();         
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
