@@ -43,9 +43,10 @@ namespace WeatherAcquisition.DAL.Repositories
 
 
         /// <summary>
-        /// Разрешает или запрещает автоматическое сохранение изменений
+        /// Разрешает или запрещает автоматическое сохранение изменений в БД
         /// </summary>
         public bool AutoSaveChanges { get; set; }
+
 
         /// <summary>
         /// CTOR
@@ -134,14 +135,18 @@ namespace WeatherAcquisition.DAL.Repositories
             if (itemsCount == 0)
                 return defaultPage;
 
+            if (query is not IOrderedQueryable<T>)
+                query = query.OrderBy(i => i.Id);
+
             if (pageIndex > 0)
-            {
                 query = query.Skip(pageIndex * pageSize);   // пропускаем
-                query = query.Take(pageSize);               // забираем
-            }
+
+            query = query.Take(pageSize);                   // забираем
 
             // получаем сами элементы (выполняем запрос)
-            var items = await query.ToArrayAsync(cancel).ConfigureAwait(false);
+            var items = await query
+                .ToArrayAsync(cancel)
+                .ConfigureAwait(false);
 
             return new Page(
                 Items: items,
