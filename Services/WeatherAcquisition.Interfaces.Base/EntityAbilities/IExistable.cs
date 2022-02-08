@@ -14,7 +14,7 @@ namespace WeatherAcquisition.Interfaces.Base.EntityAbilities
         /// <summary>
         /// Проверка на существование сущности 
         /// </summary>
-        /// <param name="item">Добавляемая сущность</param>
+        /// <param name="item">Сущность</param>
         /// <param name="cancel">Возможность прервать операцию</param>
         /// <returns>Возвращает true/false</returns>
         Task<bool> CheckExistAsync(T item, CancellationToken cancel = default);
