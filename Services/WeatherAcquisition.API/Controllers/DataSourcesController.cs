@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using WeatherAcquisition.DAL.Entities;
 using WeatherAcquisition.Interfaces.Base.Repositories;
@@ -18,7 +19,7 @@ namespace WeatherAcquisition.API.Controllers
         /// CTOR
         /// </summary>
         /// <param name="repository">Репозиторий, к которому будет осуществлять доступ контроллер</param>
-        public DataSourcesController(IRepository<DataSource> repository) 
+        public DataSourcesController(IRepository<DataSource> repository)
             => this._repository = repository;
 
 
@@ -28,7 +29,12 @@ namespace WeatherAcquisition.API.Controllers
         /// <returns></returns>
         [HttpGet("count")] // - указывает, как этот метод будет выглядеть со стороны WebAPI (т.е. как обратиться к нему)
                            // типа api/count
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(int))] // - для документирования WebAPI
+                                                                            // (статусный код, который возвращает метод; возвращаемый тип данных)
         public async Task<IActionResult> GetItemsCount()
             => Ok(await _repository.GetCountAsync());
+
+
+
     }
 }
