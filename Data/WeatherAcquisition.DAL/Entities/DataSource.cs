@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using WeatherAcquisition.DAL.Entities._Base;
 
 namespace WeatherAcquisition.DAL.Entities
@@ -6,6 +7,7 @@ namespace WeatherAcquisition.DAL.Entities
     /// <summary>
     /// Источник данных как именованная сущность
     /// </summary>
+    //[Index(nameof(Name), IsUnique = true)]       // создать индекс по колонке Name, чтобы названия были уникальными
     public class DataSource : ANamedEntity
     {
         /// <summary>

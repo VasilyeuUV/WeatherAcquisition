@@ -19,7 +19,6 @@ namespace WeatherAcquisition.DAL.Contexts
         public DbSet<DataSource> Sources { get; set; }
 
 
-
         /// <summary>
         /// CTOR
         /// </summary>
@@ -39,6 +38,14 @@ namespace WeatherAcquisition.DAL.Contexts
                 .HasMany<DataValue>()               // который имеет множество этих значений 
                 .WithOne(v => v.Source)             // с отношением один ко многим
                 .OnDelete(DeleteBehavior.Cascade);  // и политикой удаления (удаляем DataSource, удаляются все его DataValue)
+
+            // Настройка уникального индекса для поля Name таблицы DataSource
+            // Вариант 2 (первый вариант - в сущностях:
+            //    [Index(nameof(Name), IsUnique = true)]       // создать индекс по колонке Name, чтобы названия были уникальными
+            //    public class DataSource...
+            modelBuilder.Entity<DataSource>()
+                .HasIndex(source => source.Name)
+                .IsUnique(true);
         }
     }
 }
