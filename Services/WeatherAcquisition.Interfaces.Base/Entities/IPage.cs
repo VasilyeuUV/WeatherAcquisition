@@ -12,12 +12,12 @@ namespace WeatherAcquisition.Interfaces.Base.Entities
         /// <summary>
         /// Номер страницы
         /// </summary>
-        int Index { get; }
+        int PageIndex { get; }
 
         /// <summary>
         /// Количество элементов, помещающихся на странице (размер страницы)
         /// </summary>
-        int Size { get; }
+        int PageSize { get; }
 
         /// <summary>
         /// Список элементов страницы
@@ -27,16 +27,13 @@ namespace WeatherAcquisition.Interfaces.Base.Entities
         /// <summary>
         /// Общее количество элементов, возможных для получения
         /// </summary>
-        long ItemsTotalCount { get; }
+        long ItemsCount { get; }
 
         /// <summary>
         /// Общее количество страниц
         /// </summary>
-        int PagesTotalCount => Size > 0 
-            ? (int)Math.Ceiling((double)ItemsTotalCount / Size)
+        int PagesCount => PageSize > 0 
+            ? (int)Math.Ceiling((double)ItemsCount / PageSize)
             : 0;
-
-
-
     }
 }

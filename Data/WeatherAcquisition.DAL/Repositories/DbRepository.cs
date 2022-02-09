@@ -39,7 +39,7 @@ namespace WeatherAcquisition.DAL.Repositories
         /// <param name="Size">Количество элементов, помещающихся на странице (размер страницы)</param>
         /// <param name="Items">Список элементов страницы</param>
         /// <param name="ItemsTotalCount">Общее количество элементов, возможных для получения</param>
-        protected record Page(int Index, int Size, IEnumerable<T> Items, long ItemsTotalCount) : IPage<T>;
+        protected record Page(int PageIndex, int PageSize, IEnumerable<T> Items, long ItemsCount) : IPage<T>;
 
 
         /// <summary>
@@ -118,11 +118,12 @@ namespace WeatherAcquisition.DAL.Repositories
         {
             var defaultPage = new Page(
                     Items: Enumerable.Empty<T>(),
-                    Index: pageIndex,
-                    Size: pageSize,
-                    ItemsTotalCount: 0
-                    //ItemsTotalCount: await GetCountAsync(cancel).ConfigureAwait(false)
+                    PageIndex: pageIndex,
+                    PageSize: pageSize,
+                    ItemsCount: 0
+                    //ItemsCount: await GetCountAsync(cancel).ConfigureAwait(false)
                     );
+
 
             if (pageSize <= 0)
                 return defaultPage;
@@ -150,9 +151,9 @@ namespace WeatherAcquisition.DAL.Repositories
 
             return new Page(
                 Items: items,
-                Index: pageIndex, 
-                Size: pageSize, 
-                ItemsTotalCount: itemsCount);
+                PageIndex: pageIndex,
+                PageSize: pageSize,
+                ItemsCount: itemsCount);
         }
 
 
