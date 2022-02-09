@@ -77,6 +77,8 @@ namespace WeatherAcquisition.DAL.Repositories
             .ToArrayAsync(cancel)
             .ConfigureAwait(false);
 
+
+
         public async Task<T> GetByIdAsync(Guid Id, CancellationToken cancel = default)
         {
             // Учитываем, что DbSet кэширует полученные с БД данные
@@ -94,6 +96,8 @@ namespace WeatherAcquisition.DAL.Repositories
                 _ => throw new InvalidOperationException("Ошибка в определении источника данных"),
             };
         }
+
+
 
         public async Task<IEnumerable<T>> GetAsync(int skip, int count, CancellationToken cancel = default)
         {
@@ -114,6 +118,8 @@ namespace WeatherAcquisition.DAL.Repositories
                 .ConfigureAwait(false);
         }
 
+
+
         public async Task<IPage<T>> GetPageAsync(int pageIndex, int pageSize, CancellationToken cancel = default)
         {
             var defaultPage = new Page(
@@ -123,7 +129,6 @@ namespace WeatherAcquisition.DAL.Repositories
                     ItemsCount: 0
                     //ItemsCount: await GetCountAsync(cancel).ConfigureAwait(false)
                     );
-
 
             if (pageSize <= 0)
                 return defaultPage;
@@ -157,10 +162,13 @@ namespace WeatherAcquisition.DAL.Repositories
         }
 
 
+
         public async Task<long> GetCountAsync(CancellationToken cancel = default)
             => await Items
             .CountAsync(cancel)
             .ConfigureAwait(false);
+
+
 
         public async Task<T> AddAsync(T item, CancellationToken cancel = default)
         {
@@ -184,6 +192,7 @@ namespace WeatherAcquisition.DAL.Repositories
             return item;
         }
 
+
         public async Task<T> UpdateAsync(T item, CancellationToken cancel = default)
         {
             if (item is null)
@@ -204,6 +213,7 @@ namespace WeatherAcquisition.DAL.Repositories
             return item;
 
         }
+
 
         public async Task<T> DeleteAsync(T item, CancellationToken cancel = default)
         {
@@ -228,6 +238,7 @@ namespace WeatherAcquisition.DAL.Repositories
             return item;
         }
 
+
         public async Task<T> DeleteByIdAsync(Guid id, CancellationToken cancel = default)
         {
             // Учитываем возможность нахождения в кэше
@@ -243,12 +254,14 @@ namespace WeatherAcquisition.DAL.Repositories
                 : await DeleteAsync(item, cancel).ConfigureAwait(false);
         }
 
+
         public async Task<bool> CheckExistAsync(T item, CancellationToken cancel = default)
             => item is null
             ? throw new ArgumentNullException(nameof(item))
             : await Items
                 .AnyAsync(i => i.Id == item.Id, cancel)
                 .ConfigureAwait(false);
+
 
 
         public async Task<bool> CheckExistByIdAsync(Guid id, CancellationToken cancel = default)
