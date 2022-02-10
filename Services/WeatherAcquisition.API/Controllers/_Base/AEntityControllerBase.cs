@@ -88,7 +88,7 @@ namespace WeatherAcquisition.API.Controllers._Base
         /// <param name="skip">Количество пропущенных источников данных</param>
         /// <param name="count">Количество получаемых источников данных</param>
         /// <returns>Список источников данных</returns>
-        [HttpGet("items[[{skip:int},{count:int}]]")]
+        [HttpGet("items[[{skip:int},{count:int}]]")]           // - двойные квадратные скобки для экранирования
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<IEnumerable<T>>> Get(int skip, int count)
             => Ok(await _repository.GetAsync(skip, count));
