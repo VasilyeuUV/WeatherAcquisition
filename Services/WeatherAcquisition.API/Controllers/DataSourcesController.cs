@@ -63,7 +63,7 @@ namespace WeatherAcquisition.API.Controllers
         /// </summary>
         /// <param name="item">Источник данных</param>
         /// <returns>true/false</returns>
-        [HttpGet("exist")]  // - Get запрос
+        //[HttpGet("exist")]  // - Get запрос (не используем, ибо не правильно)
         [HttpPost("exist")] // - Post запрос
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(bool))]
         [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(bool))]
@@ -104,9 +104,10 @@ namespace WeatherAcquisition.API.Controllers
         /// <param name="id">Id источника данных</param>
         /// <returns>Источник данных или null</returns>
         [HttpGet("{id:Guid}")]
+        [ActionName("Get")]     // - название метода
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> GetById(Guid id)
+        public async Task<IActionResult> Get(Guid id)
             => (await _repository.GetByIdAsync(id) is { } item)
                 ? Ok(item)
                 : NotFound();
@@ -143,8 +144,8 @@ namespace WeatherAcquisition.API.Controllers
                                                                 // обратиться для получения созданного элемента
         public async Task<IActionResult> Add(DataSource item)
         {
-            var result = await _repository.AddAsync(item);                  // - репозиторий возвращает объект, который добавил
-            return CreatedAtAction(nameof(GetById), new { id = result.Id });  // - запрашиваем в репозитории новый источник по id
+            var result = await _repository.AddAsync(item);                          // - репозиторий возвращает объект, который добавил
+            return CreatedAtAction(nameof(Get), new { id = result.Id }, result);    // - запрашиваем в репозитории новый источник по id
         }
 
 
@@ -161,7 +162,7 @@ namespace WeatherAcquisition.API.Controllers
         {
             if (await _repository.UpdateAsync(item) is not { } result)
                 return NotFound(item);
-            return AcceptedAtAction(nameof(GetById), new { id = result.Id });
+            return AcceptedAtAction(nameof(Get), new { id = result.Id }, result);
         }
 
 

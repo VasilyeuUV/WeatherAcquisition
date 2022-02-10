@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace WeatherAcquisition.Interfaces.Base.Entities
+﻿namespace WeatherAcquisition.Interfaces.Base.Entities
 {
     /// <summary>
     /// Именованная сущность
@@ -11,7 +9,6 @@ namespace WeatherAcquisition.Interfaces.Base.Entities
         /// <summary>
         /// Наименование сущности
         /// </summary>
-        [Required]
         string Name { get;}
     }
 }

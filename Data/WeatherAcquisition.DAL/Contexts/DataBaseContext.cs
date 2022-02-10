@@ -39,6 +39,7 @@ namespace WeatherAcquisition.DAL.Contexts
                 .WithOne(v => v.Source)             // с отношением один ко многим
                 .OnDelete(DeleteBehavior.Cascade);  // и политикой удаления (удаляем DataSource, удаляются все его DataValue)
 
+
             // Настройка уникального индекса для поля Name таблицы DataSource
             // Вариант 2 (первый вариант - в сущностях:
             //    [Index(nameof(Name), IsUnique = true)]       // создать индекс по колонке Name, чтобы названия были уникальными

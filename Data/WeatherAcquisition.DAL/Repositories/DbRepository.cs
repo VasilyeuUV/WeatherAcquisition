@@ -39,13 +39,26 @@ namespace WeatherAcquisition.DAL.Repositories
         /// <param name="Size">Количество элементов, помещающихся на странице (размер страницы)</param>
         /// <param name="Items">Список элементов страницы</param>
         /// <param name="ItemsTotalCount">Общее количество элементов, возможных для получения</param>
-        protected record Page(int PageIndex, int PageSize, IEnumerable<T> Items, long ItemsCount) : IPage<T>;
+        protected record Page(int PageIndex, int PageSize, IEnumerable<T> Items, long ItemsCount) : IPage<T>
+        {
+            // !!! Свойства, реализованные в интерфейсе, не наследуются record !!!
+
+            /// <summary>
+            /// Общее количество страниц
+            /// </summary>
+            public int PagesCount => PageSize > 0
+                ? (int)Math.Ceiling((double)ItemsCount / PageSize)
+                : 0;
+
+        }
 
 
         /// <summary>
         /// Разрешает или запрещает автоматическое сохранение изменений в БД
+        /// (например, чтобы не сохранять каждое добавление при добавлении множества источников,
+        /// а сначала добавить, а потом сохранить все сразу)
         /// </summary>
-        public bool AutoSaveChanges { get; set; }
+        public bool AutoSaveChanges { get; set; } = true;
 
 
         /// <summary>

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
 
 namespace WeatherAcquisition.Interfaces.Base.Entities
 {
@@ -11,7 +10,6 @@ namespace WeatherAcquisition.Interfaces.Base.Entities
         /// <summary>
         /// Идентификатор
         /// </summary>
-        [Required]
         Guid Id { get; }
     }
 }
