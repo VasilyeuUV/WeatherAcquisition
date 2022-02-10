@@ -2,6 +2,9 @@
 using Microsoft.Extensions.Hosting;
 using System;
 using System.Threading.Tasks;
+using WeatherAcquisition.DAL.Entities;
+using WeatherAcquisition.Interfaces.Base.Repositories;
+using WeatherAcquisition.WebAPIClients.Clients;
 
 namespace WeatherAcquisition.ConsoleUI
 {
@@ -12,25 +15,15 @@ namespace WeatherAcquisition.ConsoleUI
             using IHost host = Hosting;
             await host.StartAsync();
 
-            //var weatherService = Services.GetRequiredService<MetaWeatherClient>();
+            var dataSources = Services.GetRequiredService<IRepository<DataSource>>();   // - получаем сервис репозитория
 
-            //// - местоположение по названию
-            //var locationByName = await weatherService.GetLocation("Moscow");
-
-            //// - местоположение по координатам
-            //var locationByCoord = await weatherService.GetLocation(locationByName[0].Coordinates);
-
-            //// - информация о погоде по id местности
-            //var weatherInfoByLocalityId = await weatherService.GetWeatheInfo(locationByName[0].Id);
-
-            //// - информация о погоде по объекту меcтности
-            //var weatherInfoByLocality = await weatherService.GetWeatheInfo(locationByName[0]);
-
-            //// - информация о погоде по id местности и дате
-            //var weatherInfoByDateLocalityId = await weatherService.GetWeatherInfo(locationByName[0].Id, DateTime.Now);
-
-            //// - информация о погоде по объекту местности и дате
-            //var weatherInfoByDateLocality = await weatherService.GetWeatherInfo(locationByName[0], DateTime.Now);
+            
+            var count = await dataSources.GetCountAsync();              // - получаем количество записей в репозитории
+            var sources = await dataSources.GetAllAsync();              // - получаем все источники
+            sources = await dataSources.GetAsync(3,5);                  // - пропускаем 3, получаем 5
+            foreach (var source in sources)
+                Console.WriteLine($"{source.Id}: {source.Name} - {source.Description}");
+            
 
             Console.WriteLine("Завершено");
             Console.ReadLine();
@@ -62,6 +55,16 @@ namespace WeatherAcquisition.ConsoleUI
             //    .SetHandlerLifetime(TimeSpan.FromMinutes(5))                        // - время жизни клиента (нужны установленные расширения Ms.Ext.Http.Polly и Polly.Extentions.Http)
             //    .AddPolicyHandler(GetRetryPolicy())                                 // - дополнительный политика клиента
             //    ;
+
+            // HttpClient будет работать как сервис приложения
+            services.AddHttpClient<IRepository<DataSource>, WebRepositoryClient<DataSource>>(   
+                client =>
+                {
+                    // - получаем из конфигурации базовый адрес и добавляем адрес самого контроллера
+                    // в конце обязательно слэш / !!! Без него работать не будет
+                    client.BaseAddress = new Uri($"{host.Configuration["WebAPI"]}/api/DataSources/");
+                });      
+
         }
 
 

@@ -136,7 +136,7 @@ namespace WeatherAcquisition.WebAPIClients.Clients
 
         public async Task<long> GetCountAsync(CancellationToken cancel = default)
             => await _client
-            .GetFromJsonAsync<int>("count", cancel)     // - метод будет автоматически серилизовать JSON
+            .GetFromJsonAsync<long>("count", cancel)     // - метод будет автоматически серилизовать JSON
             .ConfigureAwait(false);
 
 

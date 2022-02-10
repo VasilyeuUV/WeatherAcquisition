@@ -33,7 +33,7 @@ namespace WeatherAcquisition.API.Controllers._Base
         /// <returns>Количество источников данных</returns>
         [HttpGet("count")] // - указывает, как этот метод будет выглядеть со стороны WebAPI (т.е. как обратиться к нему)
                            // типа api/count
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(int))] // - для документирования WebAPI
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(long))] // - для документирования WebAPI
                                                                             // (статусный код, который возвращает метод; возвращаемый тип данных)
         public async Task<IActionResult> GetItemsCountAsync()
             => Ok(await _repository.GetCountAsync());
