@@ -170,10 +170,10 @@ namespace WeatherAcquisition.WebAPIClients.Clients
             //------------------------------------------------------------------
             #region IPage<T>
 
-            public int PageIndex { get; init; }
-            public int PageSize { get; init; }
-            public IEnumerable<T> Items { get; init; }
-            public long ItemsCount { get; init; }
+            public int PageIndex { get; set; }
+            public int PageSize { get; set; }
+            public IEnumerable<T> Items { get; set; }
+            public long ItemsCount { get; set; }
             public int PagesCount => PageSize > 0
                 ? (int)Math.Ceiling((double)ItemsCount / PageSize)
                 : 0;
