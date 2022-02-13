@@ -32,8 +32,6 @@ namespace WeatherAcquisition.Interfaces.Base.Entities
         /// <summary>
         /// Общее количество страниц
         /// </summary>
-        int PagesCount => PageSize > 0 
-            ? (int)Math.Ceiling((double)ItemsCount / PageSize)
-            : 0;
+        int PagesCount { get; }
     }
 }

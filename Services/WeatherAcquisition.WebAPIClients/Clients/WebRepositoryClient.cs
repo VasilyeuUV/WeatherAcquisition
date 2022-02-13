@@ -174,6 +174,9 @@ namespace WeatherAcquisition.WebAPIClients.Clients
             public int PageSize { get; init; }
             public IEnumerable<T> Items { get; init; }
             public long ItemsCount { get; init; }
+            public int PagesCount => PageSize > 0
+                ? (int)Math.Ceiling((double)ItemsCount / PageSize)
+                : 0;
 
             #endregion // IPage<T>
         }

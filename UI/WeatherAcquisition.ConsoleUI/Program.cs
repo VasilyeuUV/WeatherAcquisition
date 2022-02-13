@@ -18,12 +18,26 @@ namespace WeatherAcquisition.ConsoleUI
             var dataSources = Services.GetRequiredService<IRepository<DataSource>>();   // - получаем сервис репозитория
 
             
-            var count = await dataSources.GetCountAsync();              // - получаем количество записей в репозитории
-            var sources = await dataSources.GetAllAsync();              // - получаем все источники
-            sources = await dataSources.GetAsync(3,5);                  // - пропускаем 3, получаем 5
+            var count = await dataSources.GetCountAsync();              // - получаем количество записей в репозитории            
+            var sources = await dataSources.GetAsync(3,5);              // - пропускаем 3, получаем 5
+
+            /// Добавление источника
+            var addedSource = await dataSources.AddAsync(
+                new DataSource
+                {
+                    Name = $"Новый источник {DateTime.Now:HH_mm_ss}",
+                    Description = $"Время добавления нового источника: {DateTime.Now:HH_mm_ss}"
+                });
+
+            sources = await dataSources.GetAllAsync();                  // - получаем все источники
             foreach (var source in sources)
                 Console.WriteLine($"{source.Id}: {source.Name} - {source.Description}");
-            
+
+            var page = await dataSources.GetPageAsync(2, 3);            // - получить вторую страницу размером 3 элемента
+            foreach (var item in page.Items)
+                Console.WriteLine($"{item.Id}: {item.Name} - {item.Description}");
+
+
 
             Console.WriteLine("Завершено");
             Console.ReadLine();
