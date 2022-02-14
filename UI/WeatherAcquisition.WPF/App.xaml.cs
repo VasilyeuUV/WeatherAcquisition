@@ -3,6 +3,9 @@ using Microsoft.Extensions.Hosting;
 using System;
 using System.Linq;
 using System.Windows;
+using WeatherAcquisition.DAL.Entities;
+using WeatherAcquisition.Interfaces.Base.Repositories;
+using WeatherAcquisition.WebAPIClients.Clients;
 using WeatherAcquisition.WPF.ViewModels;
 using WeatherAcquisition.WPF.Views.Windows;
 using WpfMvvmBase.UIServices.UserDialogService;
@@ -83,8 +86,16 @@ namespace WeatherAcquisition.WPF
 
         private static void ConfigureServices(HostBuilderContext host, IServiceCollection services)
         {
-            services.AddScoped<MainWindowViewModel>()   // регистрируем модель-представление главного окна
-                ;
+            services.AddScoped<MainWindowViewModel>();   // регистрируем модель-представление главного окна
+
+            // HttpClient будет работать как сервис приложения
+            services.AddHttpClient<IRepository<DataSource>, WebRepositoryClient<DataSource>>(
+                client =>
+                {
+                    // - получаем из конфигурации базовый адрес и добавляем адрес самого контроллера
+                    // в конце обязательно слэш / !!! Без него работать не будет
+                    client.BaseAddress = new Uri($"{host.Configuration["WebAPI"]}/api/DataSources/");
+                });
         }
 
         #endregion // Services
