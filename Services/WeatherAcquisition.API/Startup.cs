@@ -87,11 +87,15 @@ namespace WeatherAcquisition.API
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseWebAssemblyDebugging();      // подключение к браузеру, чтобы можно было отлаживать то, что находится в браузере
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "WeatherAcquisition.API v1"));
             }
 
-            app.UseHttpsRedirection();
+            app.UseBlazorFrameworkFiles();  // возвращаем инфраструктуру (набор фалов) Blazor
+            app.UseStaticFiles();           // также возвращаем статические файлы для работы стилей и скриптов
+
+            //app.UseHttpsRedirection();
 
             app.UseRouting();
 
@@ -100,6 +104,9 @@ namespace WeatherAcquisition.API
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapFallbackToFile("index.html");  // всё, что не распознается как контроллер или маршрут (непонятный адрес)
+                                                            // будет перенаправлено на файл index.html
+                                                            // который находится в Blazor-приложении
             });
         }
     }

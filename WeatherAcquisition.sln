@@ -1,35 +1,37 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30114.105
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32126.317
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{129CAC57-714A-4090-AACC-8520EA91EC62}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeatherAcquisition.Domain", "Common\WeatherAcquisition.Domain\WeatherAcquisition.Domain.csproj", "{56B7D3AD-E18A-47BA-9A9C-8B24142853C6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WeatherAcquisition.Domain", "Common\WeatherAcquisition.Domain\WeatherAcquisition.Domain.csproj", "{56B7D3AD-E18A-47BA-9A9C-8B24142853C6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeatherAcquisition.Domain.Base", "Common\WeatherAcquisition.Domain.Base\WeatherAcquisition.Domain.Base.csproj", "{F7CF522B-2AEE-49ED-8FDB-0927C08E5F8E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WeatherAcquisition.Domain.Base", "Common\WeatherAcquisition.Domain.Base\WeatherAcquisition.Domain.Base.csproj", "{F7CF522B-2AEE-49ED-8FDB-0927C08E5F8E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{01E02184-0BDD-487A-8795-E670D1608A05}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeatherAcquisition.DAL", "Data\WeatherAcquisition.DAL\WeatherAcquisition.DAL.csproj", "{158C6AE3-4D63-4825-ADAF-6E4316F51F2B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WeatherAcquisition.DAL", "Data\WeatherAcquisition.DAL\WeatherAcquisition.DAL.csproj", "{158C6AE3-4D63-4825-ADAF-6E4316F51F2B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeatherAcquisition.DAL.SqlServer", "Data\WeatherAcquisition.DAL.SqlServer\WeatherAcquisition.DAL.SqlServer.csproj", "{027A64D4-8B0A-4BD2-A457-BBA2F7515AFF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WeatherAcquisition.DAL.SqlServer", "Data\WeatherAcquisition.DAL.SqlServer\WeatherAcquisition.DAL.SqlServer.csproj", "{027A64D4-8B0A-4BD2-A457-BBA2F7515AFF}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{B65EA91D-02AE-4BA7-B56C-F35A1E002C4A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeatherAcquisition.API", "Services\WeatherAcquisition.API\WeatherAcquisition.API.csproj", "{4B9E82D6-3B49-4EAE-A8DA-45333E9B6B97}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WeatherAcquisition.API", "Services\WeatherAcquisition.API\WeatherAcquisition.API.csproj", "{4B9E82D6-3B49-4EAE-A8DA-45333E9B6B97}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeatherAcquisition.Interfaces", "Services\WeatherAcquisition.Interfaces\WeatherAcquisition.Interfaces.csproj", "{58515877-7ADB-4FC1-BBB4-F1386B296C6B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WeatherAcquisition.Interfaces", "Services\WeatherAcquisition.Interfaces\WeatherAcquisition.Interfaces.csproj", "{58515877-7ADB-4FC1-BBB4-F1386B296C6B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeatherAcquisition.Interfaces.Base", "Services\WeatherAcquisition.Interfaces.Base\WeatherAcquisition.Interfaces.Base.csproj", "{4EFDC752-6F09-4B68-8D49-0B63B465423D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WeatherAcquisition.Interfaces.Base", "Services\WeatherAcquisition.Interfaces.Base\WeatherAcquisition.Interfaces.Base.csproj", "{4EFDC752-6F09-4B68-8D49-0B63B465423D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeatherAcquisition.WebAPIClients", "Services\WeatherAcquisition.WebAPIClients\WeatherAcquisition.WebAPIClients.csproj", "{3013CCD4-ACAD-48A5-BECA-8D1A9B601A04}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WeatherAcquisition.WebAPIClients", "Services\WeatherAcquisition.WebAPIClients\WeatherAcquisition.WebAPIClients.csproj", "{3013CCD4-ACAD-48A5-BECA-8D1A9B601A04}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UI", "UI", "{D8CA1736-92BF-4442-B15B-270A21D37BB1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeatherAcquisition.ConsoleUI", "UI\WeatherAcquisition.ConsoleUI\WeatherAcquisition.ConsoleUI.csproj", "{15F6DAA3-399B-4E39-964F-EB5EA7948691}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WeatherAcquisition.ConsoleUI", "UI\WeatherAcquisition.ConsoleUI\WeatherAcquisition.ConsoleUI.csproj", "{15F6DAA3-399B-4E39-964F-EB5EA7948691}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeatherAcquisition.WPF", "UI\WeatherAcquisition.WPF\WeatherAcquisition.WPF.csproj", "{69E0BC25-53FD-4647-A3A8-16120181AEF6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WeatherAcquisition.WPF", "UI\WeatherAcquisition.WPF\WeatherAcquisition.WPF.csproj", "{69E0BC25-53FD-4647-A3A8-16120181AEF6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeatherAcquisition.BlazorUI", "UI\WeatherAcquisition.BlazorUI\WeatherAcquisition.BlazorUI.csproj", "{9F4BC185-087E-4650-94B6-5D4D9E512E1B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,9 +41,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 		Release|x64 = Release|x64
 		Release|x86 = Release|x86
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{56B7D3AD-E18A-47BA-9A9C-8B24142853C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -164,6 +163,21 @@ Global
 		{69E0BC25-53FD-4647-A3A8-16120181AEF6}.Release|x64.Build.0 = Release|Any CPU
 		{69E0BC25-53FD-4647-A3A8-16120181AEF6}.Release|x86.ActiveCfg = Release|Any CPU
 		{69E0BC25-53FD-4647-A3A8-16120181AEF6}.Release|x86.Build.0 = Release|Any CPU
+		{9F4BC185-087E-4650-94B6-5D4D9E512E1B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F4BC185-087E-4650-94B6-5D4D9E512E1B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F4BC185-087E-4650-94B6-5D4D9E512E1B}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{9F4BC185-087E-4650-94B6-5D4D9E512E1B}.Debug|x64.Build.0 = Debug|Any CPU
+		{9F4BC185-087E-4650-94B6-5D4D9E512E1B}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{9F4BC185-087E-4650-94B6-5D4D9E512E1B}.Debug|x86.Build.0 = Debug|Any CPU
+		{9F4BC185-087E-4650-94B6-5D4D9E512E1B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F4BC185-087E-4650-94B6-5D4D9E512E1B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9F4BC185-087E-4650-94B6-5D4D9E512E1B}.Release|x64.ActiveCfg = Release|Any CPU
+		{9F4BC185-087E-4650-94B6-5D4D9E512E1B}.Release|x64.Build.0 = Release|Any CPU
+		{9F4BC185-087E-4650-94B6-5D4D9E512E1B}.Release|x86.ActiveCfg = Release|Any CPU
+		{9F4BC185-087E-4650-94B6-5D4D9E512E1B}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{56B7D3AD-E18A-47BA-9A9C-8B24142853C6} = {129CAC57-714A-4090-AACC-8520EA91EC62}
@@ -176,5 +190,9 @@ Global
 		{3013CCD4-ACAD-48A5-BECA-8D1A9B601A04} = {B65EA91D-02AE-4BA7-B56C-F35A1E002C4A}
 		{15F6DAA3-399B-4E39-964F-EB5EA7948691} = {D8CA1736-92BF-4442-B15B-270A21D37BB1}
 		{69E0BC25-53FD-4647-A3A8-16120181AEF6} = {D8CA1736-92BF-4442-B15B-270A21D37BB1}
+		{9F4BC185-087E-4650-94B6-5D4D9E512E1B} = {D8CA1736-92BF-4442-B15B-270A21D37BB1}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {CB15FFB6-1F18-45AC-B6F5-003A06FD3055}
 	EndGlobalSection
 EndGlobal
