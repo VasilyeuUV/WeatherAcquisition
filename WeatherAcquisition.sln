@@ -31,7 +31,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WeatherAcquisition.ConsoleU
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WeatherAcquisition.WPF", "UI\WeatherAcquisition.WPF\WeatherAcquisition.WPF.csproj", "{69E0BC25-53FD-4647-A3A8-16120181AEF6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeatherAcquisition.BlazorUI", "UI\WeatherAcquisition.BlazorUI\WeatherAcquisition.BlazorUI.csproj", "{9F4BC185-087E-4650-94B6-5D4D9E512E1B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WeatherAcquisition.BlazorUI", "UI\WeatherAcquisition.BlazorUI\WeatherAcquisition.BlazorUI.csproj", "{9F4BC185-087E-4650-94B6-5D4D9E512E1B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
