@@ -6,23 +6,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>WeatherAcquisition.BlazorUI</title>
     <base href="/" />
-    <link href="css/bootstrap/bootstrap.min.css" rel="stylesheet" />
-    <link href="css/app.css" rel="stylesheet" />
-    <link href="WeatherAcquisition.BlazorUI.styles.css" rel="stylesheet" />
+    <link href="lib-blazor/bootstrap/css/bootstrap.min.css" rel="stylesheet" /> <!--подключение bootstrap-->
+    <link href="lib-blazor/font-awesome/css/all.min.css" rel="stylesheet" /> <!--подключение font-awesome-->
+    <link href="lib-blazor/open-iconic/font/css/open-iconic.min.css" rel="stylesheet" /> <!--подключение open-iconic-->
+    <link href="css/app.css" rel="stylesheet" /><!--подключение файла со стилями, которые мы можем сами задавать-->
+    <link href="WeatherAcquisition.BlazorUI.styles.css" rel="stylesheet" /><!--файл автоматически генерируется при запуске-->
     <link href="manifest.json" rel="manifest" />
     <link rel="apple-touch-icon" sizes="512x512" href="icon-512.png" />
     <link rel="apple-touch-icon" sizes="192x192" href="icon-192.png" />
 </head>
 
 <body>
+    <!--в этот блок будет загружена визуальная часть нашего приложения-->
     <div id="app">Loading...</div>
 
+    <!--этот блок появится в случае ошибки-->
     <div id="blazor-error-ui">
         An unhandled error has occurred.
         <a href="" class="reload">Reload</a>
         <a class="dismiss">🗙</a>
     </div>
+
+    <!--скрипт Blazor, который обеспечивает инфраструктуру Blazor-приложения-->
     <script src="_framework/blazor.webassembly.js"></script>
+    <!--скрипт нашего приложения, обеспечивает инфраструктуру работы нашего приложения на стороне клиента-->
     <script>navigator.serviceWorker.register('service-worker.js');</script>
 </body>
 
