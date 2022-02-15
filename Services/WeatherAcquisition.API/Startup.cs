@@ -7,7 +7,6 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using WeatherAcquisition.API.Data;
 using WeatherAcquisition.DAL.Contexts;
-using WeatherAcquisition.DAL.Entities;
 using WeatherAcquisition.DAL.Repositories;
 using WeatherAcquisition.Interfaces.Base.Repositories;
 
@@ -73,6 +72,10 @@ namespace WeatherAcquisition.API
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "WeatherAcquisition.API", Version = "v1" });
             });
+
+            // - Подключаем автомаппер
+            services.AddAutoMapper(typeof(Startup));        // найдёт тип Startup, возьмёт из него сборку, просканирует ее
+                                                            // и найдёт все необходимые для работы профили
         }
 
         public void Configure(
