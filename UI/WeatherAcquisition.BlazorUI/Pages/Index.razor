@@ -6,8 +6,15 @@
 @inject IRepository<DataSourceDomainBaseModel> _repository
 
 
-@*Отображение данных:*@
+<h3>Источники данных</h3>
 
+@*Кнопка обновления*@
+@*<button class="btn btn-primary" @onclick="RefreshButton_OnClick">Обновить</button>*@
+@*или*@
+<button class="btn btn-primary" @onclick="async () => await UpdateSources()">Обновить</button>
+
+
+@*Отображение данных:*@
 @if (_sources is { } sources)
 {
     @*- на этап 2 отрендериваем полученные данные*@
@@ -31,20 +38,57 @@
         </tbody>
     </table>
 }
-else {
+else
+{
     <p>Loading... </p> @*- на первом этапе данных нет, отображаем загрузку*@
 }
 
 
 
 
-@code{
+@code {
     private IList<DataSourceDomainBaseModel>? _sources;
 
+
+    //##############################################################################################
+    #region INITIALIZATION
+
     protected override async Task OnInitializedAsync()
+        => await UpdateSources();
+
+    #endregion
+
+
+
+    //##############################################################################################
+    #region EVENTS
+
+    // <summary>
+    /// Событие кнопки "Обновить исчтоники данных"
+    /// </summary>
+    /// <returns></returns>
+    private async Task RefreshButton_OnClick()
+        => await UpdateSources();
+
+
+    #endregion // EVENTS
+
+
+    //##############################################################################################
+    #region METODS
+
+    /// <summary>
+    /// Обновление источников данных
+    /// </summary>
+    /// <returns></returns>
+    private async Task UpdateSources()
     {
         _sources = (await _repository.GetAllAsync()).ToList();
+        Console.WriteLine("Запрос источников данных завершен");     // вывод в консоль отладки в браузере
     }
+
+    #endregion // METODS
+
 
 }
 
