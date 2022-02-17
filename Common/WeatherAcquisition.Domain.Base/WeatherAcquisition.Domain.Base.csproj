@@ -6,6 +6,10 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<ProjectReference Include="..\..\Services\WeatherAcquisition.Interfaces.Base\WeatherAcquisition.Interfaces.Base.csproj" />
 	</ItemGroup>
 

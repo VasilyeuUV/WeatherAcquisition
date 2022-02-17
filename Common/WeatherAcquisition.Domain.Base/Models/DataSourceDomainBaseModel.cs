@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using WeatherAcquisition.Interfaces.Base.Entities;
 
 namespace WeatherAcquisition.Domain.Base.Models
@@ -18,6 +19,7 @@ namespace WeatherAcquisition.Domain.Base.Models
 
         public Guid Id { get; set; }
 
+        [Required]
         public string Name { get; set; }
 
         #endregion // INamedEntity

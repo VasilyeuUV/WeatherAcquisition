@@ -14,6 +14,20 @@
 <button class="btn btn-primary" @onclick="async () => await UpdateSources()">Обновить</button>
 
 
+@*Стандартная форма Добавления*@
+<EditForm Model="_newDataSource" OnValidSubmit="CreateSource">
+    <div class="row">
+        <div class="col-3">
+            <InputText id="new-datasource-name" @bind-Value="_newDataSource.Name"/>    @*- поле ввода с привязкой данных*@ 
+        </div>
+        <div class="col-9">
+            <InputTextArea id="new-datasource-description" @bind-Value="_newDataSource.Description"/>
+        </div>
+    </div>
+    <button class="btn btn-outline-primary" type="submit">Создать</button>
+</EditForm>
+
+
 @*Отображение данных:*@
 @if (_sources is { } sources)
 {
@@ -56,6 +70,7 @@ else
 @code {
     private IList<DataSourceDomainBaseModel>? _sources;
 
+    private DataSourceDomainBaseModel _newDataSource = new();   // - поле для добавления новых сущностей и использования в форме
 
     //##############################################################################################
     #region INITIALIZATION
@@ -110,9 +125,24 @@ else
         var removed = await _repository.DeleteAsync(source);
         if  (removed is not null)
             _sources.Remove(source);
-       
+
     }
 
+
+    /// <summary>
+    /// Добавление нового источника данных
+    /// </summary>
+    /// <returns></returns>
+    private async Task CreateSource()
+    {
+        var newDataSource = await _repository.AddAsync(_newDataSource);
+        if (newDataSource is null)
+            return;
+
+        _sources?.Add(newDataSource);
+
+        _newDataSource = new(); // очищаем временную переменную для новых источников данных
+    }
 
     #endregion // METODS
 
