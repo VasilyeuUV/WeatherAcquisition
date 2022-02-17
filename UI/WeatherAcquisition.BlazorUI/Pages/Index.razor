@@ -24,6 +24,7 @@
                 <th>Id</th>
                 <th>Название</th>
                 <th>Описание</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -33,6 +34,12 @@
                     <td>@src.Id</td>
                     <td>@src.Name</td>
                     <td>@src.Description</td>
+                    <td>
+                        @* Удаление источника данных*@
+                        <button class="btn btn-outline-danger" @onclick="() => Remove(src)">
+                            <i class="fa fa-trash"></i>
+                        </button>
+                    </td>
                 </tr>
             }
         </tbody>
@@ -83,9 +90,29 @@ else
     /// <returns></returns>
     private async Task UpdateSources()
     {
-        _sources = (await _repository.GetAllAsync()).ToList();
+        _sources = (await _repository
+                            .GetAllAsync())
+                            .OrderBy(o => o.Name)
+                            .ToList()
+                            ;
         Console.WriteLine("Запрос источников данных завершен");     // вывод в консоль отладки в браузере
     }
+
+    /// <summary>
+    /// Удаление источников данных
+    /// </summary>
+    /// <param name="source">Удаляемый источник</param>
+    private async Task Remove(DataSourceDomainBaseModel source)
+    {
+        if (_sources is not { Count: > 0 })
+            return;
+
+        var removed = await _repository.DeleteAsync(source);
+        if  (removed is not null)
+            _sources.Remove(source);
+       
+    }
+
 
     #endregion // METODS
 
