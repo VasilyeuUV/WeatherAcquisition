@@ -1,5 +1,51 @@
 ﻿@page "/"
+@using WeatherAcquisition.Interfaces.Base.Repositories
+@using WeatherAcquisition.Domain.Base.Models
 
-Welcome.
+@*Добавляем сервис*@
+@inject IRepository<DataSourceDomainBaseModel> _repository
+
+
+@*Отображение данных:*@
+
+@if (_sources is { } sources)
+{
+    @*- на этап 2 отрендериваем полученные данные*@
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Название</th>
+                <th>Описание</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var src in sources)
+            {
+                <tr>
+                    <td>@src.Id</td>
+                    <td>@src.Name</td>
+                    <td>@src.Description</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else {
+    <p>Loading... </p> @*- на первом этапе данных нет, отображаем загрузку*@
+}
+
+
+
+
+@code{
+    private IList<DataSourceDomainBaseModel>? _sources;
+
+    protected override async Task OnInitializedAsync()
+    {
+        _sources = (await _repository.GetAllAsync()).ToList();
+    }
+
+}
 
 

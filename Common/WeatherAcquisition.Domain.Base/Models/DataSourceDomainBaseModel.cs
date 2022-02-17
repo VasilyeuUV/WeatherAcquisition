@@ -16,7 +16,7 @@ namespace WeatherAcquisition.Domain.Base.Models
         //########################################################################
         #region INamedEntity
 
-        public Guid Id { get; }
+        public Guid Id { get; set; }
 
         public string Name { get; set; }
 
